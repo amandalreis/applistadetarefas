@@ -1,6 +1,6 @@
 # meuprojetoflutter
 
-A new Flutter project.
+Um aplicativo de lista de tarefas feito em Flutter.
 
 ## Getting Started
 
