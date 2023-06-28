@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:meuprojetoflutter/screens/form_screen.dart';
 import 'package:meuprojetoflutter/screens/home.dart';
 import 'package:meuprojetoflutter/id%20visual/theme.dart';
 
@@ -14,7 +15,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: tema,
-      home: Home(),
+      initialRoute: "/home",
+      routes: {
+        "/home":(context) => Home(),
+        "/newtask":(context) => FormScreen(),
+      },
       debugShowCheckedModeBanner: false,
     );
   }

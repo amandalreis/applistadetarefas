@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 
 final tema = ThemeData(
   appBarTheme: AppBarTheme(
-    backgroundColor: Colors.black,
+    backgroundColor: Colors.white24,
   ),
   floatingActionButtonTheme: FloatingActionButtonThemeData(
       backgroundColor: Colors.black,
       foregroundColor: Colors.white,
       shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(2))
+          borderRadius: BorderRadius.all(Radius.circular(40))
           )
           ),
   useMaterial3: true,
