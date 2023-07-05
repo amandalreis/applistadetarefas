@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:meuprojetoflutter/data/task_inherited.dart';
 import 'package:meuprojetoflutter/screens/form_screen.dart';
 import 'package:meuprojetoflutter/screens/home.dart';
 import 'package:meuprojetoflutter/id%20visual/theme.dart';
@@ -15,11 +16,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: tema,
-      initialRoute: "/home",
-      routes: {
-        "/home":(context) => Home(),
-        "/newtask":(context) => FormScreen(),
-      },
+      home: TaskInherited(child: Home(),),
+      //initialRoute: "/home",
+      /*routes: {
+        "/home":(contextHome) => TaskInherited(child: const Home()),
+        "/newtask":(contextForm) => FormScreen(taskContext: contextForm,),
+      },*/
       debugShowCheckedModeBanner: false,
     );
   }

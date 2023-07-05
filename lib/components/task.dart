@@ -5,14 +5,24 @@ class Task extends StatefulWidget {
   final String foto;
   final int dificuldade;
 
-  const Task(this.nome, this.foto, this.dificuldade, {super.key});
+  Task(this.nome, this.foto, this.dificuldade, {super.key});
+
+  int nivel = 0;
 
   @override
   State<Task> createState() => _TaskState();
 }
 
 class _TaskState extends State<Task> {
-  int nivel = 0;
+
+  bool assetOrNetwork() {
+    if (widget.foto.contains('http')) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -46,9 +56,9 @@ class _TaskState extends State<Task> {
                         height: 100,
                         child: ClipRRect(
                             borderRadius: BorderRadius.circular(4),
-                            child:
-                                Image.asset(widget.foto, fit: BoxFit.cover)
-                                ),
+                            child: (assetOrNetwork() == true)
+                                ? Image.asset(widget.foto, fit: BoxFit.cover)
+                                : Image.network(widget.foto, fit: BoxFit.cover),),
                       ),
                       Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -107,7 +117,7 @@ class _TaskState extends State<Task> {
                       IconButton(
                         onPressed: () {
                           setState(() {
-                            nivel++;
+                            widget.nivel++;
                           });
                         },
                         icon: Icon(Icons.arrow_circle_up),
@@ -125,9 +135,9 @@ class _TaskState extends State<Task> {
                     SizedBox(
                         width: 200,
                         child: LinearProgressIndicator(
-                            color: Colors.white, value: nivel / 100)),
+                            color: Colors.white, value: widget.nivel / 100)),
                     Text(
-                      'Nível ${nivel}',
+                      'Nível ${widget.nivel}',
                       style: TextStyle(fontSize: 16, color: Colors.white),
                     ),
                   ],

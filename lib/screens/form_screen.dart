@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:meuprojetoflutter/data/task_inherited.dart';
 
 class FormScreen extends StatefulWidget {
-  const FormScreen({super.key});
+  const FormScreen({super.key, required this.taskContext});
+
+  final BuildContext taskContext;
 
   @override
   State<FormScreen> createState() => _FormScreenState();
@@ -9,9 +12,6 @@ class FormScreen extends StatefulWidget {
 
 class _FormScreenState extends State<FormScreen> {
   //Variáveis
-  String? name;
-  int? difficulty;
-  String? image;
 
   //Controllers
   TextEditingController nameController = TextEditingController();
@@ -20,7 +20,7 @@ class _FormScreenState extends State<FormScreen> {
 
   final _formKey = GlobalKey<FormState>();
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext contextForm) {
     return Form(
       key: _formKey,
       child: Scaffold(
@@ -135,17 +135,20 @@ class _FormScreenState extends State<FormScreen> {
                     child: ElevatedButton(
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
-                          name = nameController.text;
-                          difficulty = int.parse(difficultyController.text);
-                          image = imageController.text;
 
-                          ScaffoldMessenger.of(context).showSnackBar(
+                          TaskInherited.of(widget.taskContext).newTask(
+                              nameController.text,
+                              imageController.text,
+                              int.parse(difficultyController.text),
+                            );
+
+                          ScaffoldMessenger.of(contextForm).showSnackBar(
                             SnackBar(
                               content: Text('Salvando tarefa...'),
                             ),
                           );
 
-                          Navigator.pop(context);
+                          Navigator.pop(contextForm);
                         }
                       },
                       child: Text('Adicionar'),

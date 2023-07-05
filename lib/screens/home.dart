@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:meuprojetoflutter/components/task.dart';
+import 'package:meuprojetoflutter/data/task_inherited.dart';
 import 'package:meuprojetoflutter/screens/form_screen.dart';
 
 class Home extends StatefulWidget {
-  const Home({super.key});
+  const Home({super.key,});
 
   @override
   State<Home> createState() => _HomeState();
@@ -11,7 +12,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext contextHome) {
     return Scaffold(
       appBar: AppBar(
         title: Container(
@@ -22,34 +23,19 @@ class _HomeState extends State<Home> {
         color: Colors.white24,
         child: ListView(
           scrollDirection: Axis.vertical,
-          children: [
-            Task(
-                'Aprender Flutter',
-                '/Users/labes/dev/meuprojetoflutter/lib/assets/images/dash.png',
-                3),
-            Task(
-                'Andar de bike',
-                '/Users/labes/dev/meuprojetoflutter/lib/assets/images/bike.webp',
-                2),
-            Task(
-                'Meditar',
-                '/Users/labes/dev/meuprojetoflutter/lib/assets/images/meditar.jpeg',
-                5),
-            Task(
-                'Ler um livro',
-                '/Users/labes/dev/meuprojetoflutter/lib/assets/images/livro.jpg',
-                4),
-            Task(
-                'Jogar Videogame',
-                '/Users/labes/dev/meuprojetoflutter/lib/assets/images/jogar.jpg',
-                1),
-            SizedBox(height: 80),
-          ],
+          padding: const EdgeInsets.only(bottom: 80),
+          children: TaskInherited.of(contextHome).taskList,
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.pushNamed(context, "/newtask");
+          Navigator.push(
+             context,
+             MaterialPageRoute(
+               builder: (contextNew) => FormScreen(taskContext: context,),
+             ),
+           );
+          //Navigator.pushNamed(contextHome, "/newtask");
         },
         backgroundColor: Colors.blue,
         child: Icon(Icons.add),
