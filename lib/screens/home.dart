@@ -23,7 +23,7 @@ class _HomeState extends State<Home> {
         color: Colors.white24,
         child: ListView(
           scrollDirection: Axis.vertical,
-          padding: const EdgeInsets.only(bottom: 80),
+          padding: const EdgeInsets.only(bottom: 90),
           children: TaskInherited.of(contextHome).taskList,
         ),
       ),
@@ -37,7 +37,7 @@ class _HomeState extends State<Home> {
            );
           //Navigator.pushNamed(contextHome, "/newtask");
         },
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.deepPurple,
         child: Icon(Icons.add),
       ),
     );

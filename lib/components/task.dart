@@ -31,7 +31,7 @@ class _TaskState extends State<Task> {
         children: [
           Container(
             decoration: BoxDecoration(
-              color: Colors.blue,
+              color: Colors.deepPurple,
               borderRadius: BorderRadius.circular(4),
             ),
             height: 140,
@@ -79,35 +79,35 @@ class _TaskState extends State<Task> {
                                 Icons.star,
                                 size: 15,
                                 color: (widget.dificuldade >= 1)
-                                    ? Colors.blue
+                                    ? Colors.deepPurple
                                     : Colors.blue[100],
                               ),
                               Icon(
                                 Icons.star,
                                 size: 15,
                                 color: (widget.dificuldade >= 2)
-                                    ? Colors.blue
+                                    ? Colors.deepPurple
                                     : Colors.blue[100],
                               ),
                               Icon(
                                 Icons.star,
                                 size: 15,
                                 color: (widget.dificuldade >= 3)
-                                    ? Colors.blue
+                                    ? Colors.deepPurple
                                     : Colors.blue[100],
                               ),
                               Icon(
                                 Icons.star,
                                 size: 15,
                                 color: (widget.dificuldade >= 4)
-                                    ? Colors.blue
+                                    ? Colors.deepPurple
                                     : Colors.blue[100],
                               ),
                               Icon(
                                 Icons.star,
                                 size: 15,
                                 color: (widget.dificuldade >= 5)
-                                    ? Colors.blue
+                                    ? Colors.deepPurple
                                     : Colors.blue[100],
                               ),
                             ],
@@ -121,7 +121,7 @@ class _TaskState extends State<Task> {
                           });
                         },
                         icon: Icon(Icons.arrow_circle_up),
-                        color: Colors.blue,
+                        color: Colors.deepPurple,
                         iconSize: 35,
                       ),
                     ],
