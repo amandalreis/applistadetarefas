@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:meuprojetoflutter/components/task.dart';
+import 'package:meuprojetoflutter/data/taskDAO.dart';
 import 'package:meuprojetoflutter/data/task_inherited.dart';
 
 class FormScreen extends StatefulWidget {
@@ -135,20 +137,38 @@ class _FormScreenState extends State<FormScreen> {
                     child: ElevatedButton(
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
-
-                          TaskInherited.of(widget.taskContext).newTask(
-                              nameController.text,
-                              imageController.text,
-                              int.parse(difficultyController.text),
+                          try {
+                            ScaffoldMessenger.of(contextForm).showSnackBar(
+                              SnackBar(
+                                content: Text('Salvando tarefa...'),
+                              ),
                             );
 
-                          ScaffoldMessenger.of(contextForm).showSnackBar(
-                            SnackBar(
-                              content: Text('Salvando tarefa...'),
-                            ),
-                          );
+                            TaskDAO().save(Task(
+                                nameController.text,
+                                imageController.text,
+                                int.parse(difficultyController.text)));
 
-                          Navigator.pop(contextForm);
+                            Future timerPop() async {
+                              await Future.delayed(Duration(milliseconds: 10));
+                              Navigator.pop(contextForm);
+                            }
+
+                            timerPop();
+
+                            ScaffoldMessenger.of(contextForm).showSnackBar(
+                              SnackBar(
+                                content: Text('Tarefa adicionada!'),
+                              ),
+                            );
+
+                          } on Exception {
+                            ScaffoldMessenger.of(contextForm).showSnackBar(
+                              SnackBar(
+                                content: Text('Ocorreu algum erro.'),
+                              ),
+                            );
+                          }
                         }
                       },
                       child: Text('Adicionar'),

@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:meuprojetoflutter/data/taskDAO.dart';
 
 class Task extends StatefulWidget {
   final String nome;
@@ -14,7 +16,6 @@ class Task extends StatefulWidget {
 }
 
 class _TaskState extends State<Task> {
-
   bool assetOrNetwork() {
     if (widget.foto.contains('http')) {
       return false;
@@ -55,10 +56,11 @@ class _TaskState extends State<Task> {
                         width: 110,
                         height: 100,
                         child: ClipRRect(
-                            borderRadius: BorderRadius.circular(4),
-                            child: (assetOrNetwork() == true)
-                                ? Image.asset(widget.foto, fit: BoxFit.cover)
-                                : Image.network(widget.foto, fit: BoxFit.cover),),
+                          borderRadius: BorderRadius.circular(4),
+                          child: (assetOrNetwork() == true)
+                              ? Image.asset(widget.foto, fit: BoxFit.cover)
+                              : Image.network(widget.foto, fit: BoxFit.cover),
+                        ),
                       ),
                       Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -114,15 +116,54 @@ class _TaskState extends State<Task> {
                           ),
                         ],
                       ),
-                      IconButton(
-                        onPressed: () {
-                          setState(() {
-                            widget.nivel++;
-                          });
-                        },
-                        icon: Icon(Icons.arrow_circle_up),
-                        color: Colors.deepPurple,
-                        iconSize: 35,
+                      Column(
+                        children: [
+                          //Botão Deletar
+                          IconButton(
+                            onPressed: () {
+                              showDialog(
+                                  context: context,
+                                  builder: (_) => AlertDialog(
+                                        title: Text(
+                                          'Deseja deletar essa tarefa?',
+                                          style: TextStyle(fontSize: 20),
+                                        ),
+                                        content: Text(
+                                            'Ela não poderá ser recuperada!'),
+                                        actions: <Widget>[
+                                          TextButton(
+                                            child: Text("Deletar"),
+                                            onPressed: () {
+                                              TaskDAO().delete(widget.nome);
+                                              Navigator.pop(context);
+                                            },
+                                          ),
+                                          TextButton(
+                                            child: Text("Cancelar"),
+                                            onPressed: () {
+                                              Navigator.pop(context);
+                                            },
+                                          ),
+                                        ],
+                                      ));
+                            },
+                            icon: Icon(Icons.delete),
+                            color: Colors.deepPurple,
+                            iconSize: 30,
+                          ),
+
+                          //Botão Subir Nível
+                          IconButton(
+                            onPressed: () {
+                              setState(() {
+                                widget.nivel++;
+                              });
+                            },
+                            icon: Icon(Icons.arrow_circle_up),
+                            color: Colors.deepPurple,
+                            iconSize: 30,
+                          ),
+                        ],
                       ),
                     ],
                   )),
